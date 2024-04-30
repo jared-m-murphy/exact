@@ -81,7 +81,7 @@ void examm_thread(int32_t id) {
                 }
             }
             if (genome->get_generation_id() > initial_genome_size) {
-                double new_epsilon = examm->get_epsilon() + (1.0 / (examm->get_max_genomes() - initial_genome_size));
+                double new_epsilon = examm->get_epsilon() - (1.0 / (examm->get_max_genomes() - initial_genome_size));
                 examm->set_epsilon(new_epsilon);
                 Log::info("New Epsilon: %f\n", examm->get_epsilon());
                 Log::info("Mutation Counts:\n");
@@ -150,7 +150,7 @@ int main(int argc, char** argv) {
 
     string mutate_function_type = "";
     get_argument(arguments, "--mutate_function_type", false, mutate_function_type);
-    double epsilon = 0;
+    double epsilon = 1;
     get_argument(arguments, "--epsilon", false, epsilon);
     if (mutate_function_type.compare("") != 0) {
         examm->set_mutate_function_type(mutate_function_type);
